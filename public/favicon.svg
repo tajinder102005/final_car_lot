@@ -1,36 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <defs>
-    <linearGradient id="carGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FF9D00" />
-      <stop offset="50%" stop-color="#FF6B00" />
-      <stop offset="100%" stop-color="#FF3800" />
-    </linearGradient>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1A1C23" />
-      <stop offset="100%" stop-color="#0D0E12" />
-    </linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="2" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
-  </defs>
-  
-  <!-- Background Badge -->
-  <rect width="64" height="64" rx="16" fill="url(#bgGrad)" stroke="#FF6B00" stroke-width="1.5" stroke-opacity="0.3" />
-  
-  <!-- Sleek Supercar Silhouette -->
-  <path d="M10 38 L14 28 C16 23 20 20 27 19 L37 19 C44 20 48 23 50 28 L54 38 Z" fill="url(#carGrad)" opacity="0.15" />
-  <path d="M9 37 C10 35 13 34 16 34 L48 34 C51 34 54 35 55 37 L57 41 C57.5 42.5 56.5 44 55 44 L9 44 C7.5 44 6.5 42.5 7 41 Z" fill="url(#carGrad)" filter="url(#glow)" />
-  <path d="M17 33 L22 23 C23.5 20.5 26.5 19 29.5 19 L36 19 C38 19 40 20 41.5 21.5 L46 27 L47 33 Z" fill="none" stroke="url(#carGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-  
-  <!-- Speed Lines / Headlight Beam -->
-  <path d="M48 38 L58 38" stroke="#FF9D00" stroke-width="2.5" stroke-linecap="round" />
-  <path d="M50 41 L56 41" stroke="#FF9D00" stroke-width="2" stroke-linecap="round" opacity="0.7" />
-  
-  <!-- Wheels -->
-  <circle cx="18" cy="43" r="4.5" fill="#0D0E12" stroke="url(#carGrad)" stroke-width="2.5" />
-  <circle cx="18" cy="43" r="1.5" fill="#FF9D00" />
-  
-  <circle cx="46" cy="43" r="4.5" fill="#0D0E12" stroke="url(#carGrad)" stroke-width="2.5" />
-  <circle cx="46" cy="43" r="1.5" fill="#FF9D00" />
+  <!-- Dark rounded background -->
+  <rect width="64" height="64" rx="14" fill="#18181B"/>
+  <!-- Lucide CarFront icon (scaled to fit) -->
+  <g transform="translate(12, 12) scale(1.67)" stroke="#F97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M21 8H6.64a2 2 0 0 0-1.9 1.37L2 16h20L19.26 9.37A2 2 0 0 0 17.36 8z"/>
+    <path d="M7 14h.01"/>
+    <path d="M17 14h.01"/>
+    <rect x="1" y="16" width="22" height="6" rx="2"/>
+    <path d="M6 22v2"/>
+    <path d="M18 22v2"/>
+  </g>
 </svg>
