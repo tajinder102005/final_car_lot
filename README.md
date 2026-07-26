@@ -22,7 +22,7 @@ token-authenticated REST API and a PostgreSQL database.
 | -------- | ------ |
 | Frontend | React 19, TanStack Router/Query, Tailwind CSS v4, shadcn/ui |
 | Backend  | TypeScript server routes (TanStack Start), REST under `/api` |
-| Database | PostgreSQL (Lovable Cloud) with row-level security |
+| Database | PostgreSQL (Supabase) with row-level security |
 | Auth     | JWT bearer tokens issued by the managed auth service |
 | Tests    | Vitest |
 

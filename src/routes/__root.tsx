@@ -10,7 +10,6 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AuthProvider } from "@/hooks/use-auth";
 import { Toaster } from "@/components/ui/sonner";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
@@ -40,9 +39,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -80,7 +76,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Torque Motors — Browse the Vehicle Showroom" },
+      { title: "Torque Motors — Car Dealership Inventory System" },
       {
         name: "description",
         content:
@@ -88,12 +84,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "Torque Motors — Browse the Vehicle Showroom" },
-      { name: "twitter:title", content: "Torque Motors — Browse the Vehicle Showroom" },
+      { property: "og:title", content: "Torque Motors — Car Dealership Inventory System" },
+      { name: "twitter:title", content: "Torque Motors — Car Dealership Inventory System" },
       { property: "og:description", content: "Search live dealership stock by make, model, category and price, then purchase available vehicles in one click." },
       { name: "twitter:description", content: "Search live dealership stock by make, model, category and price, then purchase available vehicles in one click." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3f040eb5-65c9-44c6-a1c0-c20295b4a589/id-preview-9f0d7923--f427c552-1f95-4cb0-b309-2e68a2817e8c.lovable.app-1785313225082.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3f040eb5-65c9-44c6-a1c0-c20295b4a589/id-preview-9f0d7923--f427c552-1f95-4cb0-b309-2e68a2817e8c.lovable.app-1785313225082.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -103,7 +97,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:wght@400;500;600&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
     ],
   }),
   shellComponent: RootShell,

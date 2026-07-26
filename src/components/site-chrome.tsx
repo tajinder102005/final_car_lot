@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Car, LogOut, ShieldCheck, Receipt } from "lucide-react";
+import { LogOut, ShieldCheck, Receipt } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { BrandLogo } from "@/components/brand-logo";
 
 const navLinkClass =
   "text-sm text-muted-foreground transition-colors hover:text-foreground data-[status=active]:text-foreground";
@@ -23,11 +24,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link to="/" className="flex items-center gap-2.5">
-          <span className="flex size-9 items-center justify-center rounded-lg bg-primary/15 text-primary">
-            <Car className="size-5" />
-          </span>
-          <span className="font-display text-lg font-bold tracking-tight">Torque Motors</span>
+        <Link to="/">
+          <BrandLogo size="md" />
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
