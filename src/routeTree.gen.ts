@@ -9,38 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as PurchasesRouteImport } from './routes/purchases'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as ApiDocsRouteImport } from './routes/api-docs'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ApiVehiclesIndexRouteImport } from './routes/api/vehicles/index'
-import { Route as ApiVehiclesSearchRouteImport } from './routes/api/vehicles/search'
-import { Route as ApiVehiclesIdRouteImport } from './routes/api/vehicles/$id'
-import { Route as ApiAuthRegisterRouteImport } from './routes/api/auth/register'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as ApiDocsRouteImport } from './routes/api-docs'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as PurchasesRouteImport } from './routes/purchases'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
-import { Route as ApiVehiclesIdRestockRouteImport } from './routes/api/vehicles/$id.restock'
+import { Route as ApiAuthRegisterRouteImport } from './routes/api/auth/register'
+import { Route as ApiVehiclesIndexRouteImport } from './routes/api/vehicles/index'
+import { Route as ApiVehiclesIdRouteImport } from './routes/api/vehicles/$id'
+import { Route as ApiVehiclesSearchRouteImport } from './routes/api/vehicles/search'
 import { Route as ApiVehiclesIdPurchaseRouteImport } from './routes/api/vehicles/$id.purchase'
+import { Route as ApiVehiclesIdRestockRouteImport } from './routes/api/vehicles/$id.restock'
 
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PurchasesRoute = PurchasesRouteImport.update({
-  id: '/purchases',
-  path: '/purchases',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiDocsRoute = ApiDocsRouteImport.update({
-  id: '/api-docs',
-  path: '/api-docs',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -48,29 +33,24 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ApiDocsRoute = ApiDocsRouteImport.update({
+  id: '/api-docs',
+  path: '/api-docs',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiVehiclesIndexRoute = ApiVehiclesIndexRouteImport.update({
-  id: '/api/vehicles/',
-  path: '/api/vehicles/',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiVehiclesSearchRoute = ApiVehiclesSearchRouteImport.update({
-  id: '/api/vehicles/search',
-  path: '/api/vehicles/search',
+const PurchasesRoute = PurchasesRouteImport.update({
+  id: '/purchases',
+  path: '/purchases',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiVehiclesIdRoute = ApiVehiclesIdRouteImport.update({
-  id: '/api/vehicles/$id',
-  path: '/api/vehicles/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAuthRegisterRoute = ApiAuthRegisterRouteImport.update({
-  id: '/api/auth/register',
-  path: '/api/auth/register',
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAuthLoginRoute = ApiAuthLoginRouteImport.update({
@@ -78,14 +58,34 @@ const ApiAuthLoginRoute = ApiAuthLoginRouteImport.update({
   path: '/api/auth/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiVehiclesIdRestockRoute = ApiVehiclesIdRestockRouteImport.update({
-  id: '/restock',
-  path: '/restock',
-  getParentRoute: () => ApiVehiclesIdRoute,
+const ApiAuthRegisterRoute = ApiAuthRegisterRouteImport.update({
+  id: '/api/auth/register',
+  path: '/api/auth/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVehiclesIndexRoute = ApiVehiclesIndexRouteImport.update({
+  id: '/api/vehicles/',
+  path: '/api/vehicles/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVehiclesIdRoute = ApiVehiclesIdRouteImport.update({
+  id: '/api/vehicles/$id',
+  path: '/api/vehicles/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVehiclesSearchRoute = ApiVehiclesSearchRouteImport.update({
+  id: '/api/vehicles/search',
+  path: '/api/vehicles/search',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiVehiclesIdPurchaseRoute = ApiVehiclesIdPurchaseRouteImport.update({
   id: '/purchase',
   path: '/purchase',
+  getParentRoute: () => ApiVehiclesIdRoute,
+} as any)
+const ApiVehiclesIdRestockRoute = ApiVehiclesIdRestockRouteImport.update({
+  id: '/restock',
+  path: '/restock',
   getParentRoute: () => ApiVehiclesIdRoute,
 } as any)
 
@@ -199,32 +199,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/purchases': {
-      id: '/purchases'
-      path: '/purchases'
-      fullPath: '/purchases'
-      preLoaderRoute: typeof PurchasesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api-docs': {
-      id: '/api-docs'
-      path: '/api-docs'
-      fullPath: '/api-docs'
-      preLoaderRoute: typeof ApiDocsRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -234,39 +213,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/api-docs': {
+      id: '/api-docs'
+      path: '/api-docs'
+      fullPath: '/api-docs'
+      preLoaderRoute: typeof ApiDocsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/vehicles/': {
-      id: '/api/vehicles/'
-      path: '/api/vehicles'
-      fullPath: '/api/vehicles/'
-      preLoaderRoute: typeof ApiVehiclesIndexRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/vehicles/search': {
-      id: '/api/vehicles/search'
-      path: '/api/vehicles/search'
-      fullPath: '/api/vehicles/search'
-      preLoaderRoute: typeof ApiVehiclesSearchRouteImport
+    '/purchases': {
+      id: '/purchases'
+      path: '/purchases'
+      fullPath: '/purchases'
+      preLoaderRoute: typeof PurchasesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/vehicles/$id': {
-      id: '/api/vehicles/$id'
-      path: '/api/vehicles/$id'
-      fullPath: '/api/vehicles/$id'
-      preLoaderRoute: typeof ApiVehiclesIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/auth/register': {
-      id: '/api/auth/register'
-      path: '/api/auth/register'
-      fullPath: '/api/auth/register'
-      preLoaderRoute: typeof ApiAuthRegisterRouteImport
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/auth/login': {
@@ -276,18 +248,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/vehicles/$id/restock': {
-      id: '/api/vehicles/$id/restock'
-      path: '/restock'
-      fullPath: '/api/vehicles/$id/restock'
-      preLoaderRoute: typeof ApiVehiclesIdRestockRouteImport
-      parentRoute: typeof ApiVehiclesIdRoute
+    '/api/auth/register': {
+      id: '/api/auth/register'
+      path: '/api/auth/register'
+      fullPath: '/api/auth/register'
+      preLoaderRoute: typeof ApiAuthRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/vehicles/': {
+      id: '/api/vehicles/'
+      path: '/api/vehicles'
+      fullPath: '/api/vehicles/'
+      preLoaderRoute: typeof ApiVehiclesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/vehicles/$id': {
+      id: '/api/vehicles/$id'
+      path: '/api/vehicles/$id'
+      fullPath: '/api/vehicles/$id'
+      preLoaderRoute: typeof ApiVehiclesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/vehicles/search': {
+      id: '/api/vehicles/search'
+      path: '/api/vehicles/search'
+      fullPath: '/api/vehicles/search'
+      preLoaderRoute: typeof ApiVehiclesSearchRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/vehicles/$id/purchase': {
       id: '/api/vehicles/$id/purchase'
       path: '/purchase'
       fullPath: '/api/vehicles/$id/purchase'
       preLoaderRoute: typeof ApiVehiclesIdPurchaseRouteImport
+      parentRoute: typeof ApiVehiclesIdRoute
+    }
+    '/api/vehicles/$id/restock': {
+      id: '/api/vehicles/$id/restock'
+      path: '/restock'
+      fullPath: '/api/vehicles/$id/restock'
+      preLoaderRoute: typeof ApiVehiclesIdRestockRouteImport
       parentRoute: typeof ApiVehiclesIdRoute
     }
   }
@@ -323,3 +323,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

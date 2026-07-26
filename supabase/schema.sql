@@ -145,13 +145,15 @@ create policy "Anyone can view vehicles" on public.vehicles
   for select using (true);
 
 drop policy if exists "Authenticated can add vehicles" on public.vehicles;
-create policy "Authenticated can add vehicles" on public.vehicles
-  for insert to authenticated with check (auth.uid() is not null);
+drop policy if exists "Admins can add vehicles" on public.vehicles;
+create policy "Admins can add vehicles" on public.vehicles
+  for insert to authenticated with check (public.has_role(auth.uid(), 'admin'));
 
 drop policy if exists "Authenticated can update vehicles" on public.vehicles;
-create policy "Authenticated can update vehicles" on public.vehicles
+drop policy if exists "Admins can update vehicles" on public.vehicles;
+create policy "Admins can update vehicles" on public.vehicles
   for update to authenticated
-  using (auth.uid() is not null) with check (auth.uid() is not null);
+  using (public.has_role(auth.uid(), 'admin')) with check (public.has_role(auth.uid(), 'admin'));
 
 drop policy if exists "Admins can delete vehicles" on public.vehicles;
 create policy "Admins can delete vehicles" on public.vehicles

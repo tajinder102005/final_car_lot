@@ -162,7 +162,7 @@ function ShowroomPage() {
               {visible.length} of {vehicles.length} vehicles shown
             </p>
           </div>
-          {user && (
+          {isAdmin && (
             <Button
               onClick={() => {
                 setEditing(null);
@@ -194,7 +194,7 @@ function ShowroomPage() {
               <VehicleCard
                 key={vehicle.id}
                 vehicle={vehicle}
-                canManage={Boolean(user)}
+                canManage={isAdmin}
                 isAdmin={isAdmin}
                 busy={purchaseMutation.isPending}
                 onPurchase={(target) => requireAuth(() => purchaseMutation.mutate(target))}

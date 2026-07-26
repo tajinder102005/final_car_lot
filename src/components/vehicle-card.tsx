@@ -86,7 +86,7 @@ export function VehicleCard({
           <ShoppingCart className="size-4" />
           {purchasable ? "Purchase" : "Sold out"}
         </Button>
-        {canManage && (
+        {canManage && isAdmin && (
           <Button variant="outline" size="icon" aria-label="Edit vehicle" onClick={() => onEdit(vehicle)}>
             <Pencil className="size-4" />
           </Button>

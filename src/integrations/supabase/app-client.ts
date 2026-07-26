@@ -10,9 +10,9 @@
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "./types";
 
-export const SUPABASE_URL = "https://wypdypcuqnvjyfgdcksf.supabase.co";
+export const SUPABASE_URL = "https://bmqvtboymdvqjidibzpt.supabase.co";
 export const SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5cGR5cGN1cW52anlmZ2Rja3NmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUyNTc4MzYsImV4cCI6MjEwMDgzMzgzNn0.4c3W-WG3YPdPWKkIYH_OtCj1EM1WHAe_wRC1FbC12v4";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJtcXZ0Ym95bWR2cWppZGlienB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUzMTA5MTIsImV4cCI6MjEwMDg4NjkxMn0.qgvvsGH9MTsmeIpf0kWIxFMOZzqwV1OzxH3Rm0GTAG0";
 
 function createAppClient() {
   return createClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY, {

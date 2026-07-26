@@ -44,9 +44,6 @@ export function SiteHeader() {
               Inventory
             </Link>
           )}
-          <Link to="/api-docs" className={navLinkClass}>
-            API
-          </Link>
         </nav>
 
         <div className="flex items-center gap-3">
@@ -82,7 +79,15 @@ export function SiteFooter() {
         <p className="flex items-center gap-2">
           <Receipt className="size-4" /> Torque Motors — dealership inventory system
         </p>
-        <p>Built as a TDD kata · REST API + React SPA</p>
+        <div className="flex items-center gap-4">
+          <p className="text-xs">Built as a TDD kata · REST API + React SPA</p>
+          <Link
+            to="/api-docs"
+            className="text-xs text-muted-foreground/60 transition-colors hover:text-muted-foreground underline underline-offset-4"
+          >
+            API Reference
+          </Link>
+        </div>
       </div>
     </footer>
   );
