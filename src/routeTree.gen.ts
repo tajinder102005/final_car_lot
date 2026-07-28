@@ -11,10 +11,16 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PurchasesRouteImport } from './routes/purchases'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ApiDocsRouteImport } from './routes/api-docs'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiVehiclesIndexRouteImport } from './routes/api/vehicles/index'
+import { Route as ApiVehiclesSearchRouteImport } from './routes/api/vehicles/search'
+import { Route as ApiVehiclesIdRouteImport } from './routes/api/vehicles/$id'
 import { Route as ApiAuthRegisterRouteImport } from './routes/api/auth/register'
 import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
+import { Route as ApiVehiclesIdRestockRouteImport } from './routes/api/vehicles/$id.restock'
+import { Route as ApiVehiclesIdPurchaseRouteImport } from './routes/api/vehicles/$id.purchase'
 
 const PurchasesRoute = PurchasesRouteImport.update({
   id: '/purchases',
@@ -24,6 +30,11 @@ const PurchasesRoute = PurchasesRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiDocsRoute = ApiDocsRouteImport.update({
+  id: '/api-docs',
+  path: '/api-docs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -36,6 +47,21 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiVehiclesIndexRoute = ApiVehiclesIndexRouteImport.update({
+  id: '/api/vehicles/',
+  path: '/api/vehicles/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVehiclesSearchRoute = ApiVehiclesSearchRouteImport.update({
+  id: '/api/vehicles/search',
+  path: '/api/vehicles/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVehiclesIdRoute = ApiVehiclesIdRouteImport.update({
+  id: '/api/vehicles/$id',
+  path: '/api/vehicles/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAuthRegisterRoute = ApiAuthRegisterRouteImport.update({
   id: '/api/auth/register',
   path: '/api/auth/register',
@@ -46,66 +72,116 @@ const ApiAuthLoginRoute = ApiAuthLoginRouteImport.update({
   path: '/api/auth/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiVehiclesIdRestockRoute = ApiVehiclesIdRestockRouteImport.update({
+  id: '/restock',
+  path: '/restock',
+  getParentRoute: () => ApiVehiclesIdRoute,
+} as any)
+const ApiVehiclesIdPurchaseRoute = ApiVehiclesIdPurchaseRouteImport.update({
+  id: '/purchase',
+  path: '/purchase',
+  getParentRoute: () => ApiVehiclesIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/api-docs': typeof ApiDocsRoute
   '/auth': typeof AuthRoute
   '/purchases': typeof PurchasesRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
+  '/api/vehicles/$id': typeof ApiVehiclesIdRouteWithChildren
+  '/api/vehicles/search': typeof ApiVehiclesSearchRoute
+  '/api/vehicles/': typeof ApiVehiclesIndexRoute
+  '/api/vehicles/$id/purchase': typeof ApiVehiclesIdPurchaseRoute
+  '/api/vehicles/$id/restock': typeof ApiVehiclesIdRestockRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/api-docs': typeof ApiDocsRoute
   '/auth': typeof AuthRoute
   '/purchases': typeof PurchasesRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
+  '/api/vehicles/$id': typeof ApiVehiclesIdRouteWithChildren
+  '/api/vehicles/search': typeof ApiVehiclesSearchRoute
+  '/api/vehicles': typeof ApiVehiclesIndexRoute
+  '/api/vehicles/$id/purchase': typeof ApiVehiclesIdPurchaseRoute
+  '/api/vehicles/$id/restock': typeof ApiVehiclesIdRestockRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/api-docs': typeof ApiDocsRoute
   '/auth': typeof AuthRoute
   '/purchases': typeof PurchasesRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
+  '/api/vehicles/$id': typeof ApiVehiclesIdRouteWithChildren
+  '/api/vehicles/search': typeof ApiVehiclesSearchRoute
+  '/api/vehicles/': typeof ApiVehiclesIndexRoute
+  '/api/vehicles/$id/purchase': typeof ApiVehiclesIdPurchaseRoute
+  '/api/vehicles/$id/restock': typeof ApiVehiclesIdRestockRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/admin'
+    | '/api-docs'
     | '/auth'
     | '/purchases'
     | '/api/auth/login'
     | '/api/auth/register'
+    | '/api/vehicles/$id'
+    | '/api/vehicles/search'
+    | '/api/vehicles/'
+    | '/api/vehicles/$id/purchase'
+    | '/api/vehicles/$id/restock'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/admin'
+    | '/api-docs'
     | '/auth'
     | '/purchases'
     | '/api/auth/login'
     | '/api/auth/register'
+    | '/api/vehicles/$id'
+    | '/api/vehicles/search'
+    | '/api/vehicles'
+    | '/api/vehicles/$id/purchase'
+    | '/api/vehicles/$id/restock'
   id:
     | '__root__'
     | '/'
     | '/admin'
+    | '/api-docs'
     | '/auth'
     | '/purchases'
     | '/api/auth/login'
     | '/api/auth/register'
+    | '/api/vehicles/$id'
+    | '/api/vehicles/search'
+    | '/api/vehicles/'
+    | '/api/vehicles/$id/purchase'
+    | '/api/vehicles/$id/restock'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
+  ApiDocsRoute: typeof ApiDocsRoute
   AuthRoute: typeof AuthRoute
   PurchasesRoute: typeof PurchasesRoute
   ApiAuthLoginRoute: typeof ApiAuthLoginRoute
   ApiAuthRegisterRoute: typeof ApiAuthRegisterRoute
+  ApiVehiclesIdRoute: typeof ApiVehiclesIdRouteWithChildren
+  ApiVehiclesSearchRoute: typeof ApiVehiclesSearchRoute
+  ApiVehiclesIndexRoute: typeof ApiVehiclesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -124,6 +200,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api-docs': {
+      id: '/api-docs'
+      path: '/api-docs'
+      fullPath: '/api-docs'
+      preLoaderRoute: typeof ApiDocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin': {
       id: '/admin'
       path: '/admin'
@@ -136,6 +219,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/vehicles/': {
+      id: '/api/vehicles/'
+      path: '/api/vehicles'
+      fullPath: '/api/vehicles/'
+      preLoaderRoute: typeof ApiVehiclesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/vehicles/search': {
+      id: '/api/vehicles/search'
+      path: '/api/vehicles/search'
+      fullPath: '/api/vehicles/search'
+      preLoaderRoute: typeof ApiVehiclesSearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/vehicles/$id': {
+      id: '/api/vehicles/$id'
+      path: '/api/vehicles/$id'
+      fullPath: '/api/vehicles/$id'
+      preLoaderRoute: typeof ApiVehiclesIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/auth/register': {
@@ -152,16 +256,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/vehicles/$id/restock': {
+      id: '/api/vehicles/$id/restock'
+      path: '/restock'
+      fullPath: '/api/vehicles/$id/restock'
+      preLoaderRoute: typeof ApiVehiclesIdRestockRouteImport
+      parentRoute: typeof ApiVehiclesIdRoute
+    }
+    '/api/vehicles/$id/purchase': {
+      id: '/api/vehicles/$id/purchase'
+      path: '/purchase'
+      fullPath: '/api/vehicles/$id/purchase'
+      preLoaderRoute: typeof ApiVehiclesIdPurchaseRouteImport
+      parentRoute: typeof ApiVehiclesIdRoute
+    }
   }
 }
+
+interface ApiVehiclesIdRouteChildren {
+  ApiVehiclesIdPurchaseRoute: typeof ApiVehiclesIdPurchaseRoute
+  ApiVehiclesIdRestockRoute: typeof ApiVehiclesIdRestockRoute
+}
+
+const ApiVehiclesIdRouteChildren: ApiVehiclesIdRouteChildren = {
+  ApiVehiclesIdPurchaseRoute: ApiVehiclesIdPurchaseRoute,
+  ApiVehiclesIdRestockRoute: ApiVehiclesIdRestockRoute,
+}
+
+const ApiVehiclesIdRouteWithChildren = ApiVehiclesIdRoute._addFileChildren(
+  ApiVehiclesIdRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
+  ApiDocsRoute: ApiDocsRoute,
   AuthRoute: AuthRoute,
   PurchasesRoute: PurchasesRoute,
   ApiAuthLoginRoute: ApiAuthLoginRoute,
   ApiAuthRegisterRoute: ApiAuthRegisterRoute,
+  ApiVehiclesIdRoute: ApiVehiclesIdRouteWithChildren,
+  ApiVehiclesSearchRoute: ApiVehiclesSearchRoute,
+  ApiVehiclesIndexRoute: ApiVehiclesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
