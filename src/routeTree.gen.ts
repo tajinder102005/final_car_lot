@@ -9,38 +9,231 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as PurchasesRouteImport } from './routes/purchases'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ApiDocsRouteImport } from './routes/api-docs'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiVehiclesIndexRouteImport } from './routes/api/vehicles/index'
+import { Route as ApiVehiclesSearchRouteImport } from './routes/api/vehicles/search'
+import { Route as ApiVehiclesIdRouteImport } from './routes/api/vehicles/$id'
+import { Route as ApiAuthRegisterRouteImport } from './routes/api/auth/register'
+import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
+import { Route as ApiVehiclesIdRestockRouteImport } from './routes/api/vehicles/$id.restock'
+import { Route as ApiVehiclesIdPurchaseRouteImport } from './routes/api/vehicles/$id.purchase'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PurchasesRoute = PurchasesRouteImport.update({
+  id: '/purchases',
+  path: '/purchases',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiDocsRoute = ApiDocsRouteImport.update({
+  id: '/api-docs',
+  path: '/api-docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiVehiclesIndexRoute = ApiVehiclesIndexRouteImport.update({
+  id: '/api/vehicles/',
+  path: '/api/vehicles/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVehiclesSearchRoute = ApiVehiclesSearchRouteImport.update({
+  id: '/api/vehicles/search',
+  path: '/api/vehicles/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVehiclesIdRoute = ApiVehiclesIdRouteImport.update({
+  id: '/api/vehicles/$id',
+  path: '/api/vehicles/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthRegisterRoute = ApiAuthRegisterRouteImport.update({
+  id: '/api/auth/register',
+  path: '/api/auth/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthLoginRoute = ApiAuthLoginRouteImport.update({
+  id: '/api/auth/login',
+  path: '/api/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVehiclesIdRestockRoute = ApiVehiclesIdRestockRouteImport.update({
+  id: '/restock',
+  path: '/restock',
+  getParentRoute: () => ApiVehiclesIdRoute,
+} as any)
+const ApiVehiclesIdPurchaseRoute = ApiVehiclesIdPurchaseRouteImport.update({
+  id: '/purchase',
+  path: '/purchase',
+  getParentRoute: () => ApiVehiclesIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/api-docs': typeof ApiDocsRoute
+  '/auth': typeof AuthRoute
+  '/purchases': typeof PurchasesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/auth/login': typeof ApiAuthLoginRoute
+  '/api/auth/register': typeof ApiAuthRegisterRoute
+  '/api/vehicles/$id': typeof ApiVehiclesIdRouteWithChildren
+  '/api/vehicles/search': typeof ApiVehiclesSearchRoute
+  '/api/vehicles/': typeof ApiVehiclesIndexRoute
+  '/api/vehicles/$id/purchase': typeof ApiVehiclesIdPurchaseRoute
+  '/api/vehicles/$id/restock': typeof ApiVehiclesIdRestockRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/api-docs': typeof ApiDocsRoute
+  '/auth': typeof AuthRoute
+  '/purchases': typeof PurchasesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/auth/login': typeof ApiAuthLoginRoute
+  '/api/auth/register': typeof ApiAuthRegisterRoute
+  '/api/vehicles/$id': typeof ApiVehiclesIdRouteWithChildren
+  '/api/vehicles/search': typeof ApiVehiclesSearchRoute
+  '/api/vehicles': typeof ApiVehiclesIndexRoute
+  '/api/vehicles/$id/purchase': typeof ApiVehiclesIdPurchaseRoute
+  '/api/vehicles/$id/restock': typeof ApiVehiclesIdRestockRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/api-docs': typeof ApiDocsRoute
+  '/auth': typeof AuthRoute
+  '/purchases': typeof PurchasesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/auth/login': typeof ApiAuthLoginRoute
+  '/api/auth/register': typeof ApiAuthRegisterRoute
+  '/api/vehicles/$id': typeof ApiVehiclesIdRouteWithChildren
+  '/api/vehicles/search': typeof ApiVehiclesSearchRoute
+  '/api/vehicles/': typeof ApiVehiclesIndexRoute
+  '/api/vehicles/$id/purchase': typeof ApiVehiclesIdPurchaseRoute
+  '/api/vehicles/$id/restock': typeof ApiVehiclesIdRestockRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/api-docs'
+    | '/auth'
+    | '/purchases'
+    | '/sitemap.xml'
+    | '/api/auth/login'
+    | '/api/auth/register'
+    | '/api/vehicles/$id'
+    | '/api/vehicles/search'
+    | '/api/vehicles/'
+    | '/api/vehicles/$id/purchase'
+    | '/api/vehicles/$id/restock'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/admin'
+    | '/api-docs'
+    | '/auth'
+    | '/purchases'
+    | '/sitemap.xml'
+    | '/api/auth/login'
+    | '/api/auth/register'
+    | '/api/vehicles/$id'
+    | '/api/vehicles/search'
+    | '/api/vehicles'
+    | '/api/vehicles/$id/purchase'
+    | '/api/vehicles/$id/restock'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/api-docs'
+    | '/auth'
+    | '/purchases'
+    | '/sitemap.xml'
+    | '/api/auth/login'
+    | '/api/auth/register'
+    | '/api/vehicles/$id'
+    | '/api/vehicles/search'
+    | '/api/vehicles/'
+    | '/api/vehicles/$id/purchase'
+    | '/api/vehicles/$id/restock'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  ApiDocsRoute: typeof ApiDocsRoute
+  AuthRoute: typeof AuthRoute
+  PurchasesRoute: typeof PurchasesRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiAuthLoginRoute: typeof ApiAuthLoginRoute
+  ApiAuthRegisterRoute: typeof ApiAuthRegisterRoute
+  ApiVehiclesIdRoute: typeof ApiVehiclesIdRouteWithChildren
+  ApiVehiclesSearchRoute: typeof ApiVehiclesSearchRoute
+  ApiVehiclesIndexRoute: typeof ApiVehiclesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/purchases': {
+      id: '/purchases'
+      path: '/purchases'
+      fullPath: '/purchases'
+      preLoaderRoute: typeof PurchasesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api-docs': {
+      id: '/api-docs'
+      path: '/api-docs'
+      fullPath: '/api-docs'
+      preLoaderRoute: typeof ApiDocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +241,85 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/vehicles/': {
+      id: '/api/vehicles/'
+      path: '/api/vehicles'
+      fullPath: '/api/vehicles/'
+      preLoaderRoute: typeof ApiVehiclesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/vehicles/search': {
+      id: '/api/vehicles/search'
+      path: '/api/vehicles/search'
+      fullPath: '/api/vehicles/search'
+      preLoaderRoute: typeof ApiVehiclesSearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/vehicles/$id': {
+      id: '/api/vehicles/$id'
+      path: '/api/vehicles/$id'
+      fullPath: '/api/vehicles/$id'
+      preLoaderRoute: typeof ApiVehiclesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/register': {
+      id: '/api/auth/register'
+      path: '/api/auth/register'
+      fullPath: '/api/auth/register'
+      preLoaderRoute: typeof ApiAuthRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/login': {
+      id: '/api/auth/login'
+      path: '/api/auth/login'
+      fullPath: '/api/auth/login'
+      preLoaderRoute: typeof ApiAuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/vehicles/$id/restock': {
+      id: '/api/vehicles/$id/restock'
+      path: '/restock'
+      fullPath: '/api/vehicles/$id/restock'
+      preLoaderRoute: typeof ApiVehiclesIdRestockRouteImport
+      parentRoute: typeof ApiVehiclesIdRoute
+    }
+    '/api/vehicles/$id/purchase': {
+      id: '/api/vehicles/$id/purchase'
+      path: '/purchase'
+      fullPath: '/api/vehicles/$id/purchase'
+      preLoaderRoute: typeof ApiVehiclesIdPurchaseRouteImport
+      parentRoute: typeof ApiVehiclesIdRoute
+    }
   }
 }
 
+interface ApiVehiclesIdRouteChildren {
+  ApiVehiclesIdPurchaseRoute: typeof ApiVehiclesIdPurchaseRoute
+  ApiVehiclesIdRestockRoute: typeof ApiVehiclesIdRestockRoute
+}
+
+const ApiVehiclesIdRouteChildren: ApiVehiclesIdRouteChildren = {
+  ApiVehiclesIdPurchaseRoute: ApiVehiclesIdPurchaseRoute,
+  ApiVehiclesIdRestockRoute: ApiVehiclesIdRestockRoute,
+}
+
+const ApiVehiclesIdRouteWithChildren = ApiVehiclesIdRoute._addFileChildren(
+  ApiVehiclesIdRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  ApiDocsRoute: ApiDocsRoute,
+  AuthRoute: AuthRoute,
+  PurchasesRoute: PurchasesRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiAuthLoginRoute: ApiAuthLoginRoute,
+  ApiAuthRegisterRoute: ApiAuthRegisterRoute,
+  ApiVehiclesIdRoute: ApiVehiclesIdRouteWithChildren,
+  ApiVehiclesSearchRoute: ApiVehiclesSearchRoute,
+  ApiVehiclesIndexRoute: ApiVehiclesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
