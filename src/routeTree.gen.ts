@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PurchasesRouteImport } from './routes/purchases'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ApiDocsRouteImport } from './routes/api-docs'
@@ -22,6 +23,11 @@ import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
 import { Route as ApiVehiclesIdRestockRouteImport } from './routes/api/vehicles/$id.restock'
 import { Route as ApiVehiclesIdPurchaseRouteImport } from './routes/api/vehicles/$id.purchase'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PurchasesRoute = PurchasesRouteImport.update({
   id: '/purchases',
   path: '/purchases',
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/api-docs': typeof ApiDocsRoute
   '/auth': typeof AuthRoute
   '/purchases': typeof PurchasesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
   '/api/vehicles/$id': typeof ApiVehiclesIdRouteWithChildren
@@ -103,6 +110,7 @@ export interface FileRoutesByTo {
   '/api-docs': typeof ApiDocsRoute
   '/auth': typeof AuthRoute
   '/purchases': typeof PurchasesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
   '/api/vehicles/$id': typeof ApiVehiclesIdRouteWithChildren
@@ -118,6 +126,7 @@ export interface FileRoutesById {
   '/api-docs': typeof ApiDocsRoute
   '/auth': typeof AuthRoute
   '/purchases': typeof PurchasesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
   '/api/vehicles/$id': typeof ApiVehiclesIdRouteWithChildren
@@ -134,6 +143,7 @@ export interface FileRouteTypes {
     | '/api-docs'
     | '/auth'
     | '/purchases'
+    | '/sitemap.xml'
     | '/api/auth/login'
     | '/api/auth/register'
     | '/api/vehicles/$id'
@@ -148,6 +158,7 @@ export interface FileRouteTypes {
     | '/api-docs'
     | '/auth'
     | '/purchases'
+    | '/sitemap.xml'
     | '/api/auth/login'
     | '/api/auth/register'
     | '/api/vehicles/$id'
@@ -162,6 +173,7 @@ export interface FileRouteTypes {
     | '/api-docs'
     | '/auth'
     | '/purchases'
+    | '/sitemap.xml'
     | '/api/auth/login'
     | '/api/auth/register'
     | '/api/vehicles/$id'
@@ -177,6 +189,7 @@ export interface RootRouteChildren {
   ApiDocsRoute: typeof ApiDocsRoute
   AuthRoute: typeof AuthRoute
   PurchasesRoute: typeof PurchasesRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiAuthLoginRoute: typeof ApiAuthLoginRoute
   ApiAuthRegisterRoute: typeof ApiAuthRegisterRoute
   ApiVehiclesIdRoute: typeof ApiVehiclesIdRouteWithChildren
@@ -186,6 +199,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/purchases': {
       id: '/purchases'
       path: '/purchases'
@@ -293,6 +313,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiDocsRoute: ApiDocsRoute,
   AuthRoute: AuthRoute,
   PurchasesRoute: PurchasesRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiAuthLoginRoute: ApiAuthLoginRoute,
   ApiAuthRegisterRoute: ApiAuthRegisterRoute,
   ApiVehiclesIdRoute: ApiVehiclesIdRouteWithChildren,
@@ -302,3 +323,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
