@@ -3,7 +3,7 @@
  * Every call goes through the RLS-protected database client, so the
  * permission rules live in one place (the database) rather than the UI.
  */
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/app-client";
 import type { Vehicle, VehicleFilters } from "./types";
 import type { VehicleInput } from "./schemas";
 
