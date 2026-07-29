@@ -17,10 +17,9 @@ export function errorResponse(message: string, status = 400) {
 }
 
 function config() {
-  const url = process.env.VITE_SUPABASE_URL ?? process.env.SUPABASE_URL;
-  const key = process.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? process.env.SUPABASE_ANON_KEY;
-  if (!url || !key) throw new Error("Backend is not configured");
-  return { url, key };
+  // Points at the project's own Supabase instance (see app-client.ts).
+  // Publishable/anon key only — never the service role key.
+  return { url: SUPABASE_URL, key: SUPABASE_ANON_KEY };
 }
 
 /** Anonymous client — only usable for endpoints backed by public read policies. */
