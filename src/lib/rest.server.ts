@@ -4,6 +4,7 @@
  * every request is evaluated against the same RLS policies as the SPA.
  */
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { SUPABASE_ANON_KEY, SUPABASE_URL } from "@/integrations/supabase/app-client";
 
 export function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {

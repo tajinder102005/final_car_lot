@@ -63,8 +63,25 @@ bunx vitest run   # test suite
 bunx vitest run --coverage
 ```
 
-Backend credentials are injected as `VITE_SUPABASE_URL` and
-`VITE_SUPABASE_PUBLISHABLE_KEY`.
+### Database setup (one time, manual)
+
+The app talks to a Supabase Postgres project. The connection details live in
+`src/integrations/supabase/app-client.ts` (project URL + publishable *anon*
+key only — the service role key is never shipped to the browser).
+
+To provision a project from scratch:
+
+1. Open your Supabase project → **SQL Editor** → **New query**.
+2. Paste the whole of [`supabase/schema.sql`](supabase/schema.sql) and run it.
+   It is idempotent and safe to re-run: it creates the `app_role` enum,
+   `profiles`, `user_roles`, `vehicles` and `purchases` tables, GRANTs, RLS
+   policies, the `has_role` helper, the signup trigger, the atomic
+   `purchase_vehicle` / `restock_vehicle` functions, and seed inventory. An
+   existing `vehicles` table is migrated in place instead of being replaced.
+3. Auth → Providers → Email: turn **Confirm email** off for local testing.
+4. Register the first account in the app — it is auto-promoted to **admin**.
+
+
 
 ## Test report
 
