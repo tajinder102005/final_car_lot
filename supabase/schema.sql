@@ -49,21 +49,46 @@ grant select on public.user_roles to authenticated;
 grant all on public.user_roles to service_role;
 alter table public.user_roles enable row level security;
 
--- Inventory.
+-- Inventory. Created only if absent; an existing table is migrated in place
+-- below so pre-existing rows (and extra columns such as `color`) survive.
 create table if not exists public.vehicles (
   id uuid primary key default gen_random_uuid(),
   make text not null,
   model text not null,
   category text not null,
   year integer not null default (extract(year from now()))::int,
-  price numeric not null check (price >= 0),
-  quantity integer not null default 0 check (quantity >= 0),
+  price numeric not null,
+  quantity integer not null default 0,
   description text,
   image_url text,
   created_by uuid,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+-- Bring an older/foreign `vehicles` table up to the shape the app expects.
+alter table public.vehicles add column if not exists description text;
+alter table public.vehicles add column if not exists image_url text;
+alter table public.vehicles add column if not exists created_by uuid;
+alter table public.vehicles add column if not exists year integer
+  default (extract(year from now()))::int;
+alter table public.vehicles add column if not exists created_at timestamptz not null default now();
+alter table public.vehicles add column if not exists updated_at timestamptz not null default now();
+
+-- Any extra columns the app does not write must be nullable, or inserts fail.
+do $$
+declare c record;
+begin
+  for c in
+    select column_name from information_schema.columns
+     where table_schema = 'public' and table_name = 'vehicles'
+       and is_nullable = 'NO' and column_default is null
+       and column_name not in ('id','make','model','category','price','quantity')
+  loop
+    execute format('alter table public.vehicles alter column %I drop not null', c.column_name);
+  end loop;
+end
+$$;
 
 grant select on public.vehicles to anon;
 grant select, insert, update, delete on public.vehicles to authenticated;
