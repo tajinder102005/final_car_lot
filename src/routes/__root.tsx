@@ -80,14 +80,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Torque Motors — Dealership Inventory" },
+      { title: "Torque Motors — Browse the Vehicle Showroom" },
       {
         name: "description",
         content:
-          "Torque Motors dealership inventory system: browse stock, search vehicles and manage inventory.",
+          "Search live dealership stock by make, model, category and price, then purchase available vehicles in one click.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "Torque Motors — Browse the Vehicle Showroom" },
+      { name: "twitter:title", content: "Torque Motors — Browse the Vehicle Showroom" },
+      { property: "og:description", content: "Search live dealership stock by make, model, category and price, then purchase available vehicles in one click." },
+      { name: "twitter:description", content: "Search live dealership stock by make, model, category and price, then purchase available vehicles in one click." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3f040eb5-65c9-44c6-a1c0-c20295b4a589/id-preview-9f0d7923--f427c552-1f95-4cb0-b309-2e68a2817e8c.lovable.app-1785313225082.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3f040eb5-65c9-44c6-a1c0-c20295b4a589/id-preview-9f0d7923--f427c552-1f95-4cb0-b309-2e68a2817e8c.lovable.app-1785313225082.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

@@ -35,7 +35,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Torque Motors — Browse the Vehicle Showroom" },
       {
         property: "og:description",
-        content: "Live dealership inventory with search, filtering and instant purchasing.",
+        content: "Search live dealership stock by make, model, category and price, then purchase available vehicles in one click.",
       },
     ],
   }),
